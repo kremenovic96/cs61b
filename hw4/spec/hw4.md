@@ -15,8 +15,16 @@ Getting the Skeleton Files
 
 As usual, run `git pull skeleton master` to get the skeleton files.
 
+Video Introduction
+--------------------------------
+A video that I produced a couple of years ago for this assignment can be found at [this link](https://www.youtube.com/watch?v=d6aRjJKDfpY&feature=youtu.be). Some notable differences for our semester:
+ - You do not have to write `Board.neighbors`.
+ - `Board.toString` is provided.
+ - You do not have to write `Board.isSolvable`.
+
 Introduction
 --------------------------------
+
 In this assignment, we'll be making our own puzzle solver! The 8-puzzle problem is a puzzle invented and popularized by Noyes Palmer Chapman in the 1870s. It is played on a 3-by-3 grid with 8 square tiles labeled 1 through 8 and a blank square. Your goal is to rearrange the tiles so that they are in order, using as few moves as possible. You are permitted to slide tiles horizontally or vertically into the blank square. The following shows a sequence of legal moves from an initial board (left) to the goal board (right).
 
 
@@ -57,7 +65,7 @@ One way to view the computation is as a game tree, where each search node is a n
 
 #### Board
 
-Organize your program by creating an [immutable](https://en.wikipedia.org/wiki/Immutable_object) Board class with the following API:
+Organize your program by creating an [immutable](http://cs61b.ug/sp16/materials/discussion/discussion6sol.pdf) Board class with the following API:
 
     public class Board {
       public Board(int[][] tiles) 
@@ -84,7 +92,7 @@ Where the methods work as follows:
     toString():   Returns the string representation of the board. This
                   method is provided in the skeleton
 
-**Corner cases:**  You may assume that the constructor receives an N-by-N array containing the N<sup>2</sup> integers between 0 and N<sup>2</sup> − 1, where 0 represents the blank square. The tileAt() method should throw a `java.lang.IndexOutOfBoundsException` unless both i or j are between 0 and N − 1.
+**Corner cases:**  You may assume that the constructor receives an N-by-N array containing the N<sup>2</sup> integers between 0 and N<sup>2</sup> − 1, where 0 represents the blank square. The tileAt() method should throw a `java.lang.IndexOutOfBoundsException` unless both i and j are between 0 and N − 1.
 
 **Performance requirements:** Your implementation should support all Board methods in time proportional to N<sup>2</sup> (or faster) in the worst case.
 
@@ -156,6 +164,21 @@ Submit a zip file containing just the folder for your hw4 package (similar to hw
 
 FAQ
 --------------------------------
+#### Why am I getting cannot resolve symbol 'BoardUtils'?
+You are probably compiling from the wrong folder. Compile from the "login/hw4" directory, not "login/hw4/hw4/puzzle".
+
+    javac hw4/puzzle/*.java
+
+#### What if I'm using Intellij?
+
+File -> Project Structure -> Libraries -> (+) sign to add new Java Library -> Select your **login/hw4** directory **DO NOT USE** login/hw4/hw4/puzzle -> OK -> OK -> OK.
+
+These are the steps needed for Macs. I suspect there won't be big differences for other operating systems.
+
+#### Is BoardUtils.neighbors working? It looks like it only returns the initial board.
+
+It works, but it does depend on the board being [immutable](http://cs61b.ug/sp16/materials/discussion/discussion6sol.pdf).
+
 #### How do I know if my Solver is optimal?
 
 The shortest solution to puzzle4x4-hard1.txt and puzzle4x4-hard2.txt are 38 and 47, respectively. The shortest solution to "puzzle\*[T].txt" requires exactly T moves. Warning: *puzzle36.txt*, *puzzle47.txt*, and *puzzle49.txt*, and *puzzle50.txt* are relatively difficult.
@@ -164,7 +187,7 @@ The shortest solution to puzzle4x4-hard1.txt and puzzle4x4-hard2.txt are 38 and 
 
 You should expect to run out of memory when using the Hamming priority function. Be sure not to put the JVM option in the wrong spot or it will be treated as a command-line argument, e.g.
 
-    java hw4.puzzle.Solver -Xmx1600m input/puzzle36.txt
+    java -Xmx1600m hw4.puzzle.Solver input/puzzle36.txt
 
 #### My program is too slow to solve some of the large sample puzzles, even if given a huge amount of memory. Is this OK?
 
@@ -172,4 +195,22 @@ You should not expect to solve many of the larger puzzles with the Hamming prior
 
 #### What size puzzles are we expected to solve?
 
-We are still looking into this. If you can solve some in reasonable time, you shouldn't have to worry too much.
+<!--- We are still looking into this. If you can solve some in reasonable time, you shouldn't have to worry too much. --->
+
+<!--- See piazza post [@????](https://piazza.com/ljasklfjlsjd) --->
+
+Here are the puzzles you are explicitly expected to solve:
+
+    input/puzzle2x2-[00-06].txt
+    input/puzzle3x3-[00-30].txt
+    input/puzzle4x4-[00-30].txt
+    input/puzzle[00-31].txt
+
+#### How do I ensure my Board class immutable?
+
+The most common situation where a Board is not immutable is as follows:
+ - Step 1: Create a 2D array called cowmoo.
+ - Step 2: Pass cowmoo as an argument to the Board constructor. 
+ - Step 3: Change one or more values of cowmoo.
+
+If you just copy the reference in the Board constructor, someone can change the state of your Board by changing the array. You should instead make a copy of the 2D array that is passed to your board constructor.
