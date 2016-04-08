@@ -160,10 +160,24 @@ I should get the following output:
 Submission
 --------------------------------
 
-Submit a zip file containing just the folder for your hw4 package (similar to hw3). It should contain **Board.java**, and **Solver.java**.
+Submit a zip file containing just the folder for your hw4 package (similar to hw3). It should contain **Board.java**, and **Solver.java**. Due to technical limitations of this autograder, it should contain no other .java files. If you have auxiliary java files (e.g. SearchNode.java), please move these classes into `Board` or `Solver`. It's OK if you also include `BoardUtils.class`.
 
 FAQ
 --------------------------------
+#### The autograder is complaining that graderhw4.Board objects can't be converted to Board or something like that.
+
+The first step of the AG swaps out any usage of `Board` with `graderhw4.Board` in your `Solver.java`. However, it is not smart enough to find other classes (yet). For now, move your `SearchNode.java` class inside of `Solver.java`.
+
+Likewise, if you have style errors, it will also fail. For example, if your code says 
+
+    `neighbors=BoardUtils.`
+
+instead of
+
+    `neighbors = BoardUtils`
+
+My string matching code will fail.
+
 #### Why am I getting cannot resolve symbol 'BoardUtils'?
 You are probably compiling from the wrong folder. Compile from the "login/hw4" directory, not "login/hw4/hw4/puzzle".
 
@@ -193,11 +207,15 @@ You should expect to run out of memory when using the Hamming priority function.
 
 You should not expect to solve many of the larger puzzles with the Hamming priority function. However, you should be able to solve most (but not all) of the larger puzzles with the Manhattan priority function.
 
+#### Even with the critical optimization, the priority queue may contain two or more search nodes corresponding to the same board. Should I try to eliminate these? 
+
+In principle, you could do so with a set data type such as java.util.TreeSet or java.util.HashSet (provided that the Board data type were either Comparable or had a hashCode() method). However, according to Kevin Wayne at Princeton, almost all of the benefit from avoiding duplicate boards is already extracted from the critical optimization and the cost of identifying other duplicate boards will be more than the remaining benefit from doing so. In short, you're spending tremendous amounts of memory for a relatively small runtime optimization.
+
+#### Is it OK if I try to eliminate them anyway by creating a big set of all the Boards ever seen?
+
+Maybe. Make sure your code is able to complete the puzzles below when given only 128 Megabytes of memory (see below for how to test).
+
 #### What size puzzles are we expected to solve?
-
-<!--- We are still looking into this. If you can solve some in reasonable time, you shouldn't have to worry too much. --->
-
-<!--- See piazza post [@????](https://piazza.com/ljasklfjlsjd) --->
 
 Here are the puzzles you are explicitly expected to solve:
 
@@ -205,6 +223,24 @@ Here are the puzzles you are explicitly expected to solve:
     input/puzzle3x3-[00-30].txt
     input/puzzle4x4-[00-30].txt
     input/puzzle[00-31].txt
+
+#### The puzzles work fine on my computer, but not on the AG. I'm getting a GC overhead limit exceeded error, or just a message that the "The autograder failed to execute correctly."
+
+Your computer is probably more powerful than the autograder. Notably, the AG has much less memory. You should be able to complete puzzles 30 and 31 in less than a second, and they should also work if you use only 128 megabytes of memory. To run your code with only 128 megabytes, try running your code with the following command:
+
+    java -Xmx128M hw4.puzzle.Solver ./input/puzzle30.txt
+    java -Xmx128M hw4.puzzle.Solver ./input/puzzle31.txt
+    java -Xmx128M hw4.puzzle.Solver ./input/puzzle4x4-30.txt
+
+If your code is taking longer, by far the **most likely issue is that you are not implementing the first critical optimization properly**. Another possiblity is that you are creating a hash table of every board ever seen, which may cause the AG computer to run out of memory.
+
+It is not enough to simply look at your code for the optimization and declare that it is correct. Many students have indicated confidence in their optimization implementation, only to discover a subtle bug. Use print statements or the debugger to ensure that a board never enqueues the board it came from.
+
+Situations that cover 98% of student performance bugs:
+ - Recall that there is a difference between `==` and `equals`.
+ - Recall also that the optimization is that you should not "enqueue a neighbor if its board is the same as the board of the **previous** search node". Checking vs. the current board does nothing. In other words, no Node should ever enqueue its parent.
+ - Recall that the optimization is that a board should not enqueue its own parent! This is different than checking that it is different from the board that was dequeued two iterations of A* ago.
+ 
 
 #### How do I ensure my Board class immutable?
 
@@ -214,3 +250,16 @@ The most common situation where a Board is not immutable is as follows:
  - Step 3: Change one or more values of cowmoo.
 
 If you just copy the reference in the Board constructor, someone can change the state of your Board by changing the array. You should instead make a copy of the 2D array that is passed to your board constructor.
+
+#### Why can't Gradescope compile my files even though I can compile them locally?
+
+Due to the nature of the autograder, you cannot use any public Board and Solver methods that were not mentioned in the spec. Consider moving the logic into one file.
+
+#### The AG is reporting a bug involving access$ or some kind of null pointer exception. What's going on?
+
+It's important that your `moves` and `solutions` methods work no matter the order in which they are called, and no matter how many times they are called. Failing the mutability test, or failing only `moves` but not `solutions` tests are sure signs of this issue.
+
+Credits
+--------------------------------
+
+This assignment originally developed by Kevin Wayne and Bob Sedgewick at Princeton University.
