@@ -1,7 +1,7 @@
 /** Defines a recursive list of integers.
  *  @author Josh Hug
  */
-
+//added comment
 public class IntList {
     public int head;
     public IntList tail;
@@ -34,23 +34,14 @@ public class IntList {
       * Returns ith item of this IntList. For 
       * simplicity, assume the item exists. */
     public int get(int i) {
-        
+        if (i == 0) {
+            return head;
+        }
+
+        return tail.get(i - 1);
         /** your code here */
- IntList u = this;
- int current =1;
- while (current != i)
-  {
-   u=u.tail;
-  current++;
-
-  } return u.head;
     }
-/*  recursive way:
-if (i==0){
- return head;}
-return tail.get(i-1);
 
-*/
     public String toString() {
         if (tail == null)
             return Integer.toString(head);
@@ -62,7 +53,16 @@ return tail.get(i-1);
       * to change. */
     public static IntList incrList(IntList L, int x) {
         /* Your code here. */
-        return L;        
+// starting ..
+  IntList q = new IntList(L.head, L.tail);
+ IntList p = q;
+ while ( p != null)
+ {
+   p.head = p.head + x;
+   p = p.tail;
+
+ }
+        return q;        
     }
 
     /** Returns an IntList identical to L, but with
@@ -70,6 +70,14 @@ return tail.get(i-1);
       * the 'new' keyword. */
     public static IntList dincrList(IntList L, int x) {
         /* Your code here. */
+ IntList runner;
+ runner = L;
+ while (runner != null)
+  {
+    runner.head = runner.head + x;
+    runner = runner.tail;
+
+  }
         return L;
     }
 
@@ -83,7 +91,8 @@ return tail.get(i-1);
 
         // Test your answers by uncommenting. Or use the Visualizer.
          System.out.println(L.get(1));
-        // System.out.println(incrList(L, 3));
-        // System.out.println(dincrList(L, 3));        
+         System.out.println(incrList(L, 3));
+         System.out.println(dincrList(L, 3));  
+     
     }
 } 
