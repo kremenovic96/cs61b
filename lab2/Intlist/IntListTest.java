@@ -17,6 +17,7 @@ public class IntListTest {
         IntList threeTwoOne = new IntList(3, twoOne);
 
         IntList x = IntList.list(3, 2, 1);
+
         assertEquals(threeTwoOne, x);
     }
 
@@ -40,7 +41,7 @@ public class IntListTest {
      * Anything can happen to A.
      */
 
-    @Test
+  @Test
     public void testSquareListRecursive() {
         IntList L = IntList.list(1, 2, 3);
         IntList res = IntList.squareListRecursive(L);
