@@ -26,8 +26,15 @@ class Planet
    mass=p.mass;
  imgFileName=p.imgFileName;
  }
+ public double calcDistance(Planet a)
+ {
+   return (Math.sqrt(Math.pow((xxPos-a.xxPos),2) + (Math.pow((yyPos-a.yyPos),2))));
+ }
+ public double calcForceExertedBy(Planet b)
+ {
 
 
+ }
 
 
 
