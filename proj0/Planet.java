@@ -1,6 +1,10 @@
 class Planet
 {
  public static final double G = 6.67E-11;
+double aX;
+double aY;
+double xVel;
+double yVel;
  double xxPos;
  double yyPos;
  double xxVel;
@@ -47,36 +51,43 @@ class Planet
  }
  public double calcNetForceExertedByX (Planet[] a)
  {
- xxVel=0;
+ xVel=0;
   //double xNetForce;
  for (int i=0;i<a.length;i++)
   {
     if (this.equals(a[i]))
      {continue;}
     else{
-   xxVel+=this.calcForceExertedByX(a[i]);
+   xVel+=this.calcForceExertedByX(a[i]);
         }
   }
-   return xxVel;
+   return xVel;
 
 
  }
  public double calcNetForceExertedByY(Planet[] a)
  {
-  yyVel=0;
+  yVel=0;
   for (int i=0;i<a.length;i++)
   {
     if (this.equals(a[i]))
      {continue;}
     else {
-   yyVel+=this.calcForceExertedByY(a[i]);
+   yVel+=this.calcForceExertedByY(a[i]);
          }
    }
- return yyVel;
+ return yVel;
  }
- public void update(dt,fX,fY)
+ public void update(double dt,double fX,double fY)
   {
+   double aX=fX / this.mass;
+   double aY=fY / this.mass;
+  xxVel+=dt*aX   ;
+  yyVel+=dt*aY   ;
+ xxPos+=dt*xxVel;
+ yyPos+=dt*yyVel;
 
+  
 
   }
 
