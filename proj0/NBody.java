@@ -5,6 +5,7 @@ class NBody
     double T= args[0];
     double dt=args[1];
   String filename = args[2];
+ 
 
 
 
