@@ -90,6 +90,12 @@ double yVel;
   
 
   }
+public void draw()
+  {
+   StdDraw.picture(xxPos,yyPos,imgFileName);
+ 
 
+
+  }
 
 }
