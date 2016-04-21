@@ -17,10 +17,35 @@ double rad= readRadius(filename);
     planet[i].draw();
  
   } 
-    
-  }
+    // slijedi problem
+ double time=0;
+  while (time != T)
+   {
+      double[] xForces = new double[planet.length];
+      double[] yForces = new double[planet.length]; 
+for (int i=0;i<planet.length;i++)
+ {
+    xForces[i]=planet[i].calcNetForceExertedByX(planet);
+    yForces[i]=planet[i].calcNetForceExertedByY(planet);
+ }
+for (int z=0;z<planet.length;z++)
+    {
+    planet[z].update(dt,xForces[z],yForces[z]);
+    }
+     StdDraw.picture(0,0,"./images/starfield.jpg");
+       for (int y=0;y<planet.length;y++)
+        {
+           planet[y].draw(); 
 
-public static double readRadius(String location)
+        }
+      
+
+     StdDraw.show(10);
+      time+=dt; }
+  }
+  
+
+ public static double readRadius(String location)
   {
  In in = new In(location);
    double radius=in.readDouble();
@@ -43,3 +68,4 @@ public static Planet[] readPlanets(String location)
    }
 
 }
+
