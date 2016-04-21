@@ -19,6 +19,7 @@ double rad= readRadius(filename);
   } 
     // slijedi problem
  double time=0;
+StdAudio.play("./audio/2001.mid");
   while (time != T)
    {
       double[] xForces = new double[planet.length];
