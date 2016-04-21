@@ -1,6 +1,8 @@
 class Planet
 {
  public static final double G = 6.67E-11;
+String workDir=System.getProperty("user.dir");
+String uu=workDir+"/images/";
 double aX;
 double aY;
 double xVel;
@@ -12,14 +14,14 @@ double yVel;
  double mass;
  String imgFileName;
 
- public Planet(double xP, double yP, double xV, double yV, double m, String img)
+ public Planet(double xP, double yP, double xV, double yV, double m,String img)
  {
    xxPos=xP;
    yyPos=yP;
    xxVel=xV;
    yyVel=yV;
    mass=m;
- imgFileName=img;
+ imgFileName=uu+img;
 
  }
  public Planet(Planet p)
@@ -90,7 +92,7 @@ double yVel;
   
 
   }
-public void draw()
+public  void draw()
   {
    StdDraw.picture(xxPos,yyPos,imgFileName);
  

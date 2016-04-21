@@ -11,8 +11,13 @@ double rad= readRadius(filename);
  StdDraw.setXscale(-rad,rad);
  StdDraw.setYscale(-rad,rad);
  StdDraw.picture(0,0,"./images/starfield.jpg");
- // draw planets in array 
-     Planet.draw
+ // draw planets in array
+ for (int i=0;i<planet.length;i++)
+  {
+    planet[i].draw();
+ 
+  } 
+    
   }
 
 public static double readRadius(String location)
@@ -28,7 +33,7 @@ public static Planet[] readPlanets(String location)
      In in = new In(location);
  int numOfPlanets= in.readInt();
   Planet[] planets= new Planet[numOfPlanets];
-  double wastedVar=in.readDouble();
+  double wastedVar=in.readDouble(); // this is radius of universe
  for (int i=0;i<numOfPlanets;i++)
      {
        planets[i] = new Planet(in.readDouble(),in.readDouble(),in.readDouble(),in.readDouble(),in.readDouble(),in.readString());
