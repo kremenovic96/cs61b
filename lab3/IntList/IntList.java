@@ -90,7 +90,8 @@ while (nextNodeToAdd != null)
   nextNodeToAdd = remainderOfOriginal;
 
  }
-  IntList reversed = frontOfReversed;
+  IntList reversed = new IntList();
+ reversed =frontOfReversed;
   return reversed;
  }
     public static IntList dcatenate(IntList A, IntList B) {
