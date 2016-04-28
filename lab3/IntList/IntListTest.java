@@ -76,7 +76,7 @@ IntList actual = IntList.reverse(inputs);
     expected=IntList.list(6,5,4,3,2,1,0);
    actual=IntList.reverse(inputs);
 assertEquals(expected,actual);
- assertEquals("6,5,4,3,2,1",inputs);
+ assertEquals(IntList.list(6,5,4,3,2,1),inputs);
 
   }
     /** If you're running this from the command line, you'll need
