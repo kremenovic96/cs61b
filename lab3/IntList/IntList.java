@@ -80,18 +80,29 @@ public class IntList {
      */
  public static IntList reverse (IntList A)
  {
-  return null;
+IntList frontOfReversed = null;
+IntList nextNodeToAdd = A;
+while (nextNodeToAdd != null)
+ {
+  IntList remainderOfOriginal = nextNodeToAdd.tail;
+  nextNodeToAdd.tail = frontOfReversed;
+  frontOfReversed = nextNodeToAdd;
+  nextNodeToAdd = remainderOfOriginal;
+
+ }
+  IntList reversed = frontOfReversed;
+  return reversed;
  }
     public static IntList dcatenate(IntList A, IntList B) {
         //TODO:  fill in method
 
-        while (A != null)
+        while (A.tail != null)
         {
             A=A.tail;
         }
         while (B != null)
         {
-            A =B;//a.tail je bilo
+            A.tail =B;//a.tail je bilo
             B=B.tail;
             A=A.tail;
 
