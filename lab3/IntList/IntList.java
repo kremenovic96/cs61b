@@ -105,10 +105,12 @@ public class IntList {
      */
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
-        IntList runner = new IntList(A);
+        IntList runner = new IntList();
+runner = A;
         while (runner != null)
         {runner = runner.tail;}
-        IntList runner2 = new IntList (B);
+        IntList runner2 = new IntList ();
+ runner2 = B;
         while (runner2 != null)
         {
 
