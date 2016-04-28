@@ -112,17 +112,18 @@ while (nextNodeToAdd != null)
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
 
-       IntList runner = new IntList();
-    runner = A;
+ IntList aa=new IntList();
+ aa=A;
+IntList begin = new IntList();
+ begin = aa;
+ while (aa.tail != null)
+ {
+aa =aa.tail;
 
- IntList beginning =  runner;
- while (runner.tail != null)
-  {
-   runner=runner.tail;
+ }
+aa.tail=B;
+ return begin;
   }
- runner.tail=B;
- return beginning;
-    }
 
 
     /**
