@@ -95,19 +95,14 @@ while (nextNodeToAdd != null)
  }
     public static IntList dcatenate(IntList A, IntList B) {
         //TODO:  fill in method
-
+  IntList beginning = A;
         while (A.tail != null)
         {
             A=A.tail;
         }
-        while (B != null)
-        {
-            A.tail =B;//a.tail je bilo
-            B=B.tail;
-            A=A.tail;
-
-        }
-        return A;
+       
+ A.tail= B;
+        return beginning;
     }
 
     /**
@@ -116,20 +111,17 @@ while (nextNodeToAdd != null)
      */
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
-        IntList runner = new IntList();
-runner = A;
-        while (runner != null)
-        {runner = runner.tail;}
-        IntList runner2 = new IntList ();
- runner2 = B;
-        while (runner2 != null)
-        {
 
-            runner.tail = runner2;
-            runner = runner.tail;
-            runner2=runner2.tail;
-        }
-        return runner;
+       IntList runner = new IntList();
+    runner = A;
+
+ IntList beginning =  runner;
+ while (runner.tail != null)
+  {
+   runner=runner.tail;
+  }
+ runner.tail=B;
+ return beginning;
     }
 
 
