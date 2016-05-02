@@ -66,7 +66,7 @@ return false;
  
  Node first = sentinel.next;
  first.next.prev = sentinel;
- sentinel.next = first;//.next;
+ sentinel.next = first.next;//.next;
  size -= 1;
 
  return first.head;
