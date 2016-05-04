@@ -71,7 +71,13 @@ return false;
 
  return first.head;
 }
-
+ public Blorp removeLast() {
+ Node last = sentinel.prev;
+ last.prev.next = sentinel;
+ sentinel.prev = last.prev;
+ size -= 1;
+ return last.head;
+}
 public Blorp get(int index) {
  if (index == 0) {
   return sentinel.next.head;
