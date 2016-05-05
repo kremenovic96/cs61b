@@ -46,7 +46,7 @@ public int size(){
 }
 public void printDeque() {
  for (int i = 0; i<items.length; i++) {
-System.out.printn(items[i] + " ");
+System.out.print(items[i] + " ");
 }
 }
 public item removeFirst() {
