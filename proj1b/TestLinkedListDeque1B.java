@@ -1,6 +1,6 @@
 import org.junit.Test;
 import static org.junit.Assert.*;
- // its seems that removeLast() is messing things up
+ // its seems that removeLast() is messing things up(see testPrint);
  public class TestLinkedListDeque1B {
  //size and add is working
  //@Test
@@ -91,7 +91,7 @@ import static org.junit.Assert.*;
  @Test
  public void testPrint() {
  StudentLinkedListDeque<Integer> a2 = new StudentLinkedListDeque<Integer>();
-a2.addFirst(1);
+/*a2.addFirst(1);
  a2.addFirst(2);
  a2.addFirst(3);
  a2.addLast(4);
@@ -105,6 +105,19 @@ a2.addFirst(1);
 
  a2.addLast(7);
  
+ a2.printDeque();*/
+
+a2.addFirst(1);
+ a2.addFirst(2);
+ a2.addFirst(3);
+ a2.addLast(4);
+ a2.addLast(5);
+ a2.addLast(6);
+ a2.printDeque();
+ a2.removeFirst();
+ a2.printDeque();
+int actual = a2.get(4);
+ assertEquals(6,actual);
  a2.printDeque();
 }
  public static void main(String[] args) {
