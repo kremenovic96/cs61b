@@ -49,6 +49,25 @@ public class TestArrayDeque1B {
  // sad1.printDeque();
 }
  @Test
+  public void testGet() {
+     StudentArrayDeque<Integer> sad1 = new StudentArrayDeque<Integer>();
+   /*sad1.addFirst(1);
+   sad1.addFirst(2);
+sad1.addFirst(3);
+sad1.addFirst(4);
+sad1.addFirst(5);
+sad1.addFirst(6);
+   int actual = sad1.get(0);
+  assertEquals(6,actual);*/
+sad1.addFirst(1);
+sad1.addLast(4);
+int actual = sad1.get(0);
+ assertEquals(actual,1);
+ actual = sad1.get(1);
+ assertEquals(actual,4);
+ //čudno iznad
+}
+// @Test
    public void testRemove() {
     StudentArrayDeque<Integer> sad1 = new StudentArrayDeque<Integer>();
      sad1.addFirst(4);
@@ -60,8 +79,10 @@ public class TestArrayDeque1B {
   
  actual = sad1.removeLast();
  assertEquals(actual,7);
+ actual = sad1.size();
+ assertEquals(actual,2);
  actual = sad1.get(0);
- assertEquals(actual,null);
+ assertEquals(null,actual);
  actual = sad1.get(3);
  assertEquals(actual,null);
 }
