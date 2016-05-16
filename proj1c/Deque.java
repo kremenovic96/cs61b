@@ -1,7 +1,7 @@
 public interface Deque<Item> {
 
- public void addFirst(Item);
- public void addLast(Item);
+ public void addFirst(Item x);
+ public void addLast(Item x);
  public boolean isEmpty();
  public int size();
  public void printDeque();
