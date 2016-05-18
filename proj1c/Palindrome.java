@@ -3,15 +3,17 @@ public class Palindrome {
   Deque<Character> aa = new LinkedListDequeSolution<Character>();
    int i = 0;
    while (i != word.length()) {
-   aa.addFirst(word.charAt(i));
+   aa.addLast(word.charAt(i));
      i += 1;
 
+
   }
+     return aa;
  }
  public static boolean isPalindrome(String word) {
         int len = word.length();
         int i = 0;
-        int b;
+        int b=len-i-1;
        // boolean iss = true;
         while (i != b) {
             if (word.charAt(i) == word.charAt(len-i-1)) {
@@ -22,12 +24,15 @@ public class Palindrome {
                 return false;
             }
          }
-      return true;
-        }
+     if (word.charAt(i) == word.charAt(b))
+     {return true;}
+     return false; // štagod
+ }
 
  // begginning with main (just trying)..
  public static void main(String[] args) {
     Deque<Character> bb = new LinkedListDequeSolution<Character>();
     bb = wordToDeque("hasdaelo");
+     bb.printDeque();
     }
 }
