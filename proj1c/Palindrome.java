@@ -29,10 +29,21 @@ public class Palindrome {
      return false; // štagod
  }
 
- // begginning with main (just trying)..
+ // little tests using main..
  public static void main(String[] args) {
     Deque<Character> bb = new LinkedListDequeSolution<Character>();
     bb = wordToDeque("hasdaelo");
      bb.printDeque();
+     String a = "racecar";
+     boolean is = isPalindrome(a);
+     if (is) {
+     System.out.println("string " + a + " is palindrome!");
+
+     }
+     a = "welcome";
+     is = isPalindrome(a);
+      if (is) {
+       System.out.println("string" + a + " is palindrome");
+      }
     }
 }
