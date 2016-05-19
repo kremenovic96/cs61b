@@ -24,10 +24,16 @@ public class Palindrome {
                 return false;
             }
          }
-     if (word.charAt(i) == word.charAt(b))
-     {return true;}
+     if (i == b) {
+         return true;
+     }
+    /* if (word.charAt(i) == word.charAt(b))
+     {return true;}*/ // dont need to check letter with itself (of course).
      return false; // štagod
  }
+    /*public static boolean isPalindrome(String word, CharacterComparator cc) {
+
+    }*/
 
  // little tests using main..
  public static void main(String[] args) {
