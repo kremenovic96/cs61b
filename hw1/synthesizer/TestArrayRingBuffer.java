@@ -7,10 +7,26 @@ import static org.junit.Assert.*;
  */
 
 public class TestArrayRingBuffer {
-    @Test
+    //@Test
     public void someTest() {
         //ArrayRingBuffer arb = new ArrayRingBuffer(10);
     }
+ //
+    @Test
+ public void mytest(){
+     ArrayRingBuffer<Double> aa = new ArrayRingBuffer<Double>(4);
+ boolean testt = true;
+assertEquals(testt,aa.isEmpty());
+ testt = false;
+
+ aa.enqueue(33.1);
+  assertEquals(testt,aa.isEmpty());
+ aa.enqueue(44.8);
+ aa.enqueue(62.3);
+  aa.enqueue(-3.4);
+ double tt = aa.dequeue(); 
+ assertEquals(tt,33,1);
+}
 
     /** Calls tests for ArrayRingBuffer. */
     public static void main(String[] args) {
