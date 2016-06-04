@@ -23,9 +23,9 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T>{
         //       here shadows the field we inherit from AbstractBoundedQueue, so
         //       you'll need to use this.capacity to set the capacity.
         this.rb = (T[])new Object[capacity];
-        first = 0;
-        last = 0;
-        fillCount = 0;
+        this.first = 0;
+        this.last = 0;
+        this.fillCount = 0;
         this.capacity = capacity;
 
 
@@ -53,7 +53,11 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T>{
      */
     public T dequeue() {
         // TODO: Dequeue the first item. Don't forget to decrease fillCount and update
+
         first += 1;
+        if (first == capacity) {
+            first = 0;
+        }
         fillCount -= 1;
         return rb[first -1];
 
