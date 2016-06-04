@@ -26,6 +26,8 @@ assertEquals(testt,aa.isEmpty());
   aa.enqueue(-3.4);
  double tt = aa.dequeue(); 
  assertEquals(tt,33,1);
+ tt = aa.peek();
+ assertEquals(tt,44,8);
 }
 
     /** Calls tests for ArrayRingBuffer. */
