@@ -54,12 +54,14 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T>{
     public T dequeue() {
         // TODO: Dequeue the first item. Don't forget to decrease fillCount and update
 
-        first += 1;
-        if (first == capacity) {
+
+        if (first == this.capacity) {
             first = 0;
         }
+        T current = rb[first];
+        first += 1;
         fillCount -= 1;
-        return rb[first -1];
+        return current;
 
     }
         /**
@@ -68,7 +70,9 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T>{
         @Override
     public T peek() {
         // TODO: Return the first item. None of your instance variables should change.
-
+        if (first == this.capacity){
+            first = 0;
+        }
             return rb[first];
     }
 
