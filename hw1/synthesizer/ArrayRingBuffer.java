@@ -6,7 +6,7 @@ import java.util.Iterator;
 //TODO: Make sure to make this class extend AbstractBoundedQueue<t>
 public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T>{
     /* Index for the next dequeue or peek. */
-    private int first = 1;            // index for the next dequeue or peek
+    private int first = 0;            // index for the next dequeue or peek
     /* Index for the next enqueue. */
     private int last = first;
     /* Array for storing the buffer data. */
@@ -39,7 +39,13 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T>{
     public void enqueue(T x) {
         // TODO: Enqueue the item. Don't forget to increase fillCount and update last.
         if (last == capacity) {
+
             last = 0;
+            //throw new RuntimeException("Ring Buffer Overflow");
+        }
+        if (fillCount >= capacity){
+            //hmmm ..
+            throw new RuntimeException("Ring Buffer Overflow ");
         }
         rb[last] = x;
         last += 1;
@@ -54,7 +60,9 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T>{
     public T dequeue() {
         // TODO: Dequeue the first item. Don't forget to decrease fillCount and update
 
-
+        if (this.fillCount == 0){
+            throw new RuntimeException("Ring Buffer Underflow");
+        }
         if (first == this.capacity) {
             first = 0;
         }
@@ -75,7 +83,23 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T>{
         }
             return rb[first];
     }
-
+    public class wizard implements Iterator<T>{
+        private int currentindex;
+        public wizard(){
+            currentindex = 0;
+        }
+        public boolean hasNext() {
+            return (currentindex<capacity);
+        }
+        public T next () {
+            T currentThing =  rb[currentindex];
+            currentindex += 1;
+            return currentThing;
+        }
+    }
         // TODO: When you get to part 5, implement the needed code to support iteration.
+    public Iterator<T> iterator () {
+        return new wizard();
+    }
     }
 
