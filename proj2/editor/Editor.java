@@ -11,9 +11,13 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.scene.text.Font;
 import javafx.scene.input.KeyCode;
+// trying a thing with lists
+import java.util.LinkedList;
+
 public class Editor extends Application {
     private static final int WINDOW_WIDTH = 500;
     private static final int WINDOW_HEIGHT = 500;
+    LinkedList<String> list = new LinkedList<String>();
 
         private class KeyEventHandler implements EventHandler<KeyEvent> {
             int textCenterX;
@@ -27,6 +31,7 @@ public class Editor extends Application {
       KeyEventHandler(Group root,int windowWidth,int windowHeight){
           textCenterX = windowWidth / 2;
           textCenterY = windowHeight / 2;
+          //third arg for text was ""
           displayText = new Text(textCenterX,textCenterY,"");
           displayText.setTextOrigin(VPos.TOP);
           displayText.setFont(Font.font(fontName,fontSize));
@@ -38,7 +43,8 @@ public class Editor extends Application {
             if (keyEvent.getEventType() == KeyEvent.KEY_TYPED) {
                 String characterTyped = keyEvent.getCharacter();
                 if (characterTyped.length() > 0 && characterTyped.charAt(0) != 8) {
-                    displayText.setText(characterTyped);
+                    list.addLast(characterTyped);
+                    displayText.setText(list.toString());
                     keyEvent.consume();
                 }
                 centerText();
