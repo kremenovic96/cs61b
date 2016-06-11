@@ -43,6 +43,13 @@ public class Editor extends Application {
            public void handle(KeyEvent keyEvent) {
             if (keyEvent.getEventType() == KeyEvent.KEY_TYPED) {
                 String characterTyped = keyEvent.getCharacter();
+                //
+                if (characterTyped.charAt(0) == 8){
+
+                    aa.deleteCharAt(aa.length() -1 );
+                    displayText.setText(aa.toString());
+                }
+                //
                 if (characterTyped.length() > 0 && characterTyped.charAt(0) != 8) {
                    // list.addLast(characterTyped);
 //setText arg was list.ToString()
