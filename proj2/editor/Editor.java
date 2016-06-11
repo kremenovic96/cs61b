@@ -25,7 +25,7 @@ public class Editor extends Application {
             int textCenterY;
             private static final int STARTING_FONT_SIZE = 20;
             private static final int STARTING_TEXT_POSITION_X = 250;
-            private static final int STARTING_TEXT_POSITION_Y = 250;
+            private static final int STARTING_TEXT_POSITION_Y = 10;
        private Text displayText = new Text(STARTING_TEXT_POSITION_X,STARTING_TEXT_POSITION_Y,"");
             private int fontSize = STARTING_FONT_SIZE;
             private String fontName = "Verdana";
@@ -69,8 +69,8 @@ public class Editor extends Application {
             private void centerText() {
             double textHeight = displayText.getLayoutBounds().getHeight();
             double textWidth = displayText.getLayoutBounds().getWidth();
-                double textTop = textCenterY - textHeight /2;
-             double textLeft = textCenterX - textWidth /2;
+                double textTop = 0; //= textCenterY - textHeight /2;
+             double textLeft = 0; //textCenterX - textWidth /2;
             displayText.setX(textLeft);
             displayText.setY(textTop);
              displayText.toFront();
