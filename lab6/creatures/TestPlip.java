@@ -33,13 +33,32 @@ public class TestPlip {
         p.stay();
         assertEquals(2.00, p.energy(), 0.01);
     }
-
+    @Test
+    public void mytest(){
+    Plip a = new Plip();
+    assertEquals(1,a.energy(),0.01);
+    assertEquals(new Color(99,127,76),a.color());
+    a.move();
+    assertEquals(0.85,a.energy(),0.01);
+    a.stay();
+    assertEquals(1.05,a.energy(),0.01);
+    assertEquals("plip",a.name());
+        a.stay();
+        a.stay();
+        a.stay();
+        a.stay();
+        a.stay();
+        a.stay();
+    assertEquals(2,a.energy(),0.01);
+    }
     @Test
     public void testReplicate() {
-
+    Plip aa = new Plip();
+        Plip b = aa.replicate();
+        assertNotSame(aa,b);
     }
 
-    //@Test
+    @Test
     public void testChoose() {
         Plip p = new Plip(1.2);
         HashMap<Direction, Occupant> surrounded = new HashMap<Direction, Occupant>();
