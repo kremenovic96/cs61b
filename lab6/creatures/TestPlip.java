@@ -53,9 +53,12 @@ public class TestPlip {
     }
     @Test
     public void testReplicate() {
-    Plip aa = new Plip();
+    Plip aa = new Plip(2);
         Plip b = aa.replicate();
         assertNotSame(aa,b);
+        double actual = b.energy();
+        double expected = 1;
+        assertEquals(1,actual,0.01);
     }
 
     @Test
@@ -75,6 +78,42 @@ public class TestPlip {
         Action expected = new Action(Action.ActionType.STAY);
 
         assertEquals(expected, actual);
+
+
+        Plip bb = new Plip(1);
+        HashMap<Direction,Occupant> bbb = new HashMap<Direction, Occupant>();
+        bbb.put(Direction.TOP,new Impassible());
+        bbb.put(Direction.BOTTOM,new Empty());
+        bbb.put(Direction.LEFT, new Impassible());
+        bbb.put(Direction.RIGHT, new Impassible());
+        actual = bb.chooseAction(bbb);
+        expected = new Action(Action.ActionType.REPLICATE,Direction.BOTTOM);
+        assertEquals(expected,actual);
+
+
+
+        Plip aa = new Plip(5);
+        HashMap<Direction,Occupant> okolo = new HashMap<Direction, Occupant>();
+        okolo.put(Direction.TOP,new Empty());
+        okolo.put(Direction.BOTTOM,new Impassible());
+        okolo.put(Direction.LEFT, new Impassible());
+        okolo.put(Direction.RIGHT, new Impassible());
+        actual = aa.chooseAction(okolo);
+        expected = new Action(Action.ActionType.REPLICATE,Direction.TOP);
+        assertEquals(expected,actual);
+// pass 1/2 times(as it should)
+       /* Plip cc = new Plip(2);
+        HashMap<Direction,Occupant> ooo = new HashMap<Direction, Occupant>();
+        ooo.put(Direction.TOP,new Impassible());
+        ooo.put(Direction.BOTTOM,new Empty());
+        ooo.put(Direction.LEFT, new Impassible());
+        ooo.put(Direction.RIGHT, new Empty());
+        actual = cc.chooseAction(ooo);
+        expected = new Action(Action.ActionType.REPLICATE,Direction.BOTTOM);
+        assertEquals(expected,actual);
+        expected = new Action(Action.ActionType.REPLICATE,Direction.RIGHT);
+        assertEquals(expected,actual);*/
+
     }
 
     public static void main(String[] args) {

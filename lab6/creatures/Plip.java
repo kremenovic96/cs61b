@@ -1,4 +1,5 @@
 package creatures;
+//import com.sun.prism.shader.DrawCircle_LinearGradient_REFLECT_AlphaTest_Loader;
 import huglife.Creature;
 import huglife.Direction;
 import huglife.Action;
@@ -92,8 +93,10 @@ public class Plip extends Creature {
      *  Plip.
      */
     public Plip replicate() {
+     //energy *= 0.5;
+    return new Plip(energy *= 0.5);
+        //return new Plip(energy);
 
-        return new Plip(this.energy *= 0.5);
     }
 
     /** Plips take exactly the following actions based on NEIGHBORS:
@@ -107,17 +110,35 @@ public class Plip extends Creature {
      *  for an example to follow.
      */
     public Action chooseAction(Map<Direction, Occupant> neighbors) {
-        List<Direction> e = getNeighborsOfType(neighbors,"empty");
-        if(e.size() == 0){
+
+        List<Direction> emptyy = getNeighborsOfType(neighbors,"empty");
+        List<Direction> cloruses = getNeighborsOfType(neighbors,"clorus");
+        if (emptyy.size() == 0) {
             return new Action(Action.ActionType.STAY);
         }
-         if(this.energy >= 1){
-            this.replicate();
+        if (energy >= 1){
+            Direction moveDir = HugLifeUtils.randomEntry(emptyy);
+            return new Action(Action.ActionType.REPLICATE,moveDir);
         }
-        List<Direction> c = getNeighborsOfType(neighbors,"clorus");
-         if  (c.size() > 0) {
+
+
+        /*if(!emptyy.isEmpty()){
+            if (this.energy() >=  1){
+                Direction moveDir = HugLifeUtils.randomEntry(emptyy);
+                return new Action(Action.ActionType.REPLICATE, moveDir);
+            }
+            Direction moveDir = HugLifeUtils.randomEntry(emptyy);
+            return new Action(Action.ActionType.MOVE,moveDir);
+        }*/
+        /*else if(energy >= 1 ){
+              Direction moveDir = HugLifeUtils.randomEntry(emptyy);
+            return new Action(Action.ActionType.REPLICATE, moveDir);
+
+        } */
+        //List<Direction> c = getNeighborsOfType(neighbors,"clorus");
+         else if  (!cloruses.isEmpty()) {
              if (HugLifeUtils.random() < moveProbability) {
-                Direction moveDir = HugLifeUtils.randomEntry(e);
+                Direction moveDir = HugLifeUtils.randomEntry(emptyy);
                 return new Action(Action.ActionType.MOVE, moveDir);
             }
         }
