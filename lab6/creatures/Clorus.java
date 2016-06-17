@@ -1,7 +1,12 @@
 package creatures;
-
 import huglife.Creature;
 import java.awt.Color;
+import java.util.Map;
+
+import huglife.Action;
+import huglife.Direction;
+import huglife.Occupant;
+
 public class Clorus extends Creature {
     private int r;
     private int g;
@@ -35,9 +40,20 @@ public class Clorus extends Creature {
 
 
 
+
+        this.energy += c.energy();
+
+
+    }
+    public Clorus replicate() {
+        return new Clorus(this.energy *= 0.5);
     }
 
+    public Action chooseAction(Map<Direction, Occupant> neighbors) {
 
+
+
+    }
 
 
 
