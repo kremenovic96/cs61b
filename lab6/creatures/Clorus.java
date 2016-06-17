@@ -32,7 +32,7 @@ public class Clorus extends Creature {
         energy -= 0.01;
     }
     public void attack(Creature c) {
-        
+
 
 
     }
