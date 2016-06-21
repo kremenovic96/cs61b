@@ -73,17 +73,28 @@ public class TestClorus {
 
         Clorus qq = new Clorus(1);
         HashMap<Direction,Occupant> loc2 = new HashMap<Direction,Occupant>();
-        loc2.put(Direction.BOTTOM,new Plip());
-        loc2.put(Direction.LEFT,new Plip());
-        loc2.put(Direction.RIGHT,new Plip());
+        loc2.put(Direction.BOTTOM,new Empty());
+        loc2.put(Direction.LEFT,new Empty());
+        loc2.put(Direction.RIGHT,new Empty());
         loc2.put(Direction.TOP,new Empty());
         expected = new Action(Action.ActionType.REPLICATE,Direction.TOP);
-        actual = qq.chooseAction(loc1);
+        actual = qq.chooseAction(loc2);
+        assertEquals(expected,actual);
+        expected = new Action(Action.ActionType.REPLICATE,Direction.BOTTOM);
+        assertEquals(expected,actual);
+        expected = new Action(Action.ActionType.REPLICATE,Direction.RIGHT);
+        assertEquals(expected,actual);
+        expected = new Action(Action.ActionType.REPLICATE,Direction.LEFT);
         assertEquals(expected,actual);
 
 
 
 
+
+
+    }
+    public static void main(String[] args){
+        System.exit(jh61b.junit.textui.runClasses(TestClorus.class));
     }
 
 

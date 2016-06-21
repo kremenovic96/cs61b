@@ -1,11 +1,9 @@
 package creatures;
-import huglife.Creature;
-import java.awt.Color;
-import java.util.Map;
+import huglife.*;
 
-import huglife.Action;
-import huglife.Direction;
-import huglife.Occupant;
+import java.awt.Color;
+import java.util.List;
+import java.util.Map;
 
 public class Clorus extends Creature {
     private int r;
@@ -26,7 +24,7 @@ public class Clorus extends Creature {
         r = 34;
         g = 0;
         b = 231;
-        return Color(r,g,b);
+        return color(r,g,b);
     }
 
     public void move() {
@@ -50,6 +48,24 @@ public class Clorus extends Creature {
     }
 
     public Action chooseAction(Map<Direction, Occupant> neighbors) {
+        List<Direction> emptyes = getNeighborsOfType(neighbors,"empty");
+        List<Direction> plips = getNeighborsOfType(neighbors,"plip");
+        if (emptyes.isEmpty()) {
+            this.stay();
+            return new Action(Action.ActionType.STAY);
+        }
+        if (!plips.isEmpty()) {
+            Direction attackDir = HugLifeUtils.randomEntry(plips);
+            return new Action(Action.ActionType.ATTACK,attackDir);
+        }
+        if (this.energy >= 1) {
+            Direction repDir = HugLifeUtils.randomEntry(emptyes);
+            return new Action(Action.ActionType.REPLICATE,repDir);
+        }
+        return new Action(Action.ActionType.MOVE,HugLifeUtils.randomEntry(emptyes));
+
+
+
 
 
 
