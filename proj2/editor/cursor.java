@@ -20,10 +20,9 @@ public class cursor extends Application {
     private final Rectangle cursor;
 
     public cursor() {
-        cursor = new Rectangle(0, 0);
-        cursor.setHeight(25);
-        cursor.setWidth(1);
-
+        cursor = new Rectangle(1,25);
+        /*cursor.setHeight(25);
+        cursor.setWidth(1);*/
         cursor.setX(250);
         cursor.setY(250);
     }
