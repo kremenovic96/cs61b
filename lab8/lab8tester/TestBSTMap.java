@@ -51,7 +51,8 @@ public class TestBSTMap {
         assertEquals(null,b.get("starChild"));
         b.put("starChild", 5);
         assertNotEquals(null,b.get("starChild"));
-        b.put("KISS", 5);
+        b.put("KISS", 5); //this causes problem
+   //mine line         assertEquals((long)5,(long)b.get("KISS"));
         assertNotEquals(null,b.get("KISS"));
         assertNotEquals(null,b.get("starChild"));
     }
