@@ -23,15 +23,15 @@ public class Percolation {
 
         rowLenght = N;
         grid = new boolean[N][N];
-        for (int i = 0; i < N - 2; i++){
-            for (int j = 0; j < N - 2; j++){
+        for (int i = 0; i < N; i++){
+            for (int j = 0; j < N; j++){
                 grid[i][j] = false; //too lazy to check on 'net if it is false by default.
             }
         }
-        for(int i = 0; i < N; i++){
+       /* for(int i = 0; i < N; i++){
             sites.union(TOP, xyTo1d(0, i));
             sites.union(BOTTOM, xyTo1d(rowLenght - 1, i));
-        }
+        }   */
     }
     public void open(int row, int col){
     /*if((rowLenght - 1) < (row || col)){
@@ -40,6 +40,13 @@ public class Percolation {
                 throw new IndexOutOfBoundsException();
     }
     grid[row][col] = true;
+        if(row == 0){
+            sites.union(TOP, xyTo1d(row, col));
+        }
+        if(row == rowLenght - 1){
+            sites.union(BOTTOM, xyTo1d(row, col));
+        }
+        // leaving code below(in this method) as it is, so sleepy.
      if(row > 0) {
         if(grid[row][col] == grid[row -1][col]){
             sites.union(xyTo1d(row,col), xyTo1d(row -1, col));
@@ -47,8 +54,9 @@ public class Percolation {
         } }
      if(row < rowLenght - 1){
          if(grid[row][col] == grid[row + 1][col]){
-            sites.union(xyTo1d(row,col),xyTo1d(row + 1,col));
-
+             //if((row + 1) != rowLenght - 1) {
+                 sites.union(xyTo1d(row, col), xyTo1d(row + 1, col));
+            // }
         }}
       if(col > 0){
           if(grid[row][col] == grid[row][col - 1]){
@@ -61,6 +69,7 @@ public class Percolation {
               sites.union(xyTo1d(row,col), xyTo1d(row, col + 1));
 
           }
+
       }
 
     numOfopenSites += 1;
