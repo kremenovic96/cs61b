@@ -6,11 +6,23 @@ public class PercolationStats {
        if((N < 1) || (T < 1)){
            throw new IllegalArgumentException();
        }
+       for(int i = 0; i < T; i++){
+
+       }
+
    }
-    public double mean(){return 0;}
-    public double stddev(){return 0;}
-    public double confidenceLow(){return 0;}
-    public double confidenceHigh(){return 0;}
+    public double mean(){
+        return 0;
+    }
+    public double stddev(){
+        return 0;
+    }
+    public double confidenceLow(){
+        return 0;
+    }
+    public double confidenceHigh(){
+        return 0;
+    }
 
 
-}                       
+}
