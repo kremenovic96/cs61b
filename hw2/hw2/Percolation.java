@@ -39,40 +39,43 @@ public class Percolation {
         if ( (rowLenght - 1 < row) || (rowLenght - 1 < col) || (col < 0) || (row < 0)) {
                 throw new IndexOutOfBoundsException();
     }
-    grid[row][col] = true;
-        if(row == 0){
-            sites.union(TOP, xyTo1d(row, col));
+        if(grid[row][col] != true) {
+            grid[row][col] = true;
+            if (row == 0) {
+                sites.union(TOP, xyTo1d(row, col));
+            }
+            if (row == rowLenght - 1) {
+                sites.union(BOTTOM, xyTo1d(row, col));
+            }
+            // leaving code below(in this method) as it is, so sleepy.
+            if (row > 0) {
+                if (grid[row][col] == grid[row - 1][col]) {
+                    sites.union(xyTo1d(row, col), xyTo1d(row - 1, col));
+
+                }
+            }
+            if (row < rowLenght - 1) {
+                if (grid[row][col] == grid[row + 1][col]) {
+                    //if((row + 1) != rowLenght - 1) {
+                    sites.union(xyTo1d(row, col), xyTo1d(row + 1, col));
+                    // }
+                }
+            }
+            if (col > 0) {
+                if (grid[row][col] == grid[row][col - 1]) {
+                    sites.union(xyTo1d(row, col), xyTo1d(row, col - 1));
+
+                }
+            }
+            if (col < rowLenght - 1) {
+                if (grid[row][col] == grid[row][col + 1]) {
+                    sites.union(xyTo1d(row, col), xyTo1d(row, col + 1));
+
+                }
+
+            }
+            numOfopenSites += 1;
         }
-        if(row == rowLenght - 1){
-            sites.union(BOTTOM, xyTo1d(row, col));
-        }
-        // leaving code below(in this method) as it is, so sleepy.
-     if(row > 0) {
-        if(grid[row][col] == grid[row -1][col]){
-            sites.union(xyTo1d(row,col), xyTo1d(row -1, col));
-
-        } }
-     if(row < rowLenght - 1){
-         if(grid[row][col] == grid[row + 1][col]){
-             //if((row + 1) != rowLenght - 1) {
-                 sites.union(xyTo1d(row, col), xyTo1d(row + 1, col));
-            // }
-        }}
-      if(col > 0){
-          if(grid[row][col] == grid[row][col - 1]){
-              sites.union(xyTo1d(row,col), xyTo1d(row, col - 1));
-
-          }
-      }
-      if(col < rowLenght - 1){
-          if(grid[row][col] == grid[row][col + 1]){
-              sites.union(xyTo1d(row,col), xyTo1d(row, col + 1));
-
-          }
-
-      }
-
-    numOfopenSites += 1;
     }
     public boolean isOpen(int row, int col){
         if ( (rowLenght - 1 < row) || (rowLenght - 1 < col) || (col< 0) || (row < 0)) {
